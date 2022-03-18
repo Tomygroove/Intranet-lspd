@@ -18,7 +18,7 @@ class Mandat
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Degre", inversedBy="mandats")
      */
     private $id_degre;
 
@@ -52,12 +52,12 @@ class Mandat
         return $this->id;
     }
 
-    public function getIdDegre(): ?int
+    public function getIdDegre(): ?Degre
     {
         return $this->id_degre;
     }
 
-    public function setIdDegre(int $id_degre): self
+    public function setIdDegre(?Degre $id_degre): self
     {
         $this->id_degre = $id_degre;
 

@@ -28,9 +28,9 @@ class Information
     private $referent_formation;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToMany(targetEntity="App\Entity\Agent", inversedBy="informations")
      */
-    private $liste_agents;
+    private $id_agent;
 
     public function getId(): ?int
     {
@@ -61,14 +61,14 @@ class Information
         return $this;
     }
 
-    public function getListeAgents(): ?string
+    public function getIdAgent(): ?Agent
     {
-        return $this->liste_agents;
+        return $this->id_agent;
     }
 
-    public function setListeAgents(string $liste_agents): self
+    public function setIdAgent(?Agent $id_agent): self
     {
-        $this->liste_agents = $liste_agents;
+        $this->id_agent = $id_agent;
 
         return $this;
     }

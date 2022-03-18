@@ -18,7 +18,7 @@ class AvisRecherche
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Agent", inversedBy="avis_recherches")
      */
     private $id_agent;
 
@@ -28,7 +28,7 @@ class AvisRecherche
     private $date;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Degre", inversedBy="avis_recherches")
      */
     private $id_degre;
 
@@ -52,12 +52,12 @@ class AvisRecherche
         return $this->id;
     }
 
-    public function getIdAgent(): ?int
+    public function getIdAgent(): ?Agent
     {
         return $this->id_agent;
     }
 
-    public function setIdAgent(int $id_agent): self
+    public function setIdAgent(?Agent $id_agent): self
     {
         $this->id_agent = $id_agent;
 
@@ -76,12 +76,12 @@ class AvisRecherche
         return $this;
     }
 
-    public function getIdDegre(): ?int
+    public function getIdDegre(): ?Degre
     {
         return $this->id_degre;
     }
 
-    public function setIdDegre(int $id_degre): self
+    public function setIdDegre(?Degre $id_degre): self
     {
         $this->id_degre = $id_degre;
 

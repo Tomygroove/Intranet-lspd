@@ -18,7 +18,7 @@ class DeclarationVol
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Agent", inversedBy="declaration_vols")
      */
     private $id_agent;
 
@@ -57,12 +57,12 @@ class DeclarationVol
         return $this->id;
     }
 
-    public function getIdAgent(): ?int
+    public function getIdAgent(): ?Agent
     {
         return $this->id_agent;
     }
 
-    public function setIdAgent(int $id_agent): self
+    public function setIdAgent(?Agent $id_agent): self
     {
         $this->id_agent = $id_agent;
 

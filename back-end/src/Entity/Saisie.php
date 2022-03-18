@@ -18,7 +18,7 @@ class Saisie
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Agent", inversedBy="saisies")
      */
     private $id_agent;
 
@@ -33,9 +33,9 @@ class Saisie
     private $nom_suspect;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToMany(targetEntity="App\Entity\SaisieType", inversedBy="saisies")
      */
-    private $type_saisie;
+    private $id_type_saisie;
 
     /**
      * @ORM\Column(type="integer")
@@ -52,12 +52,12 @@ class Saisie
         return $this->id;
     }
 
-    public function getIdAgent(): ?int
+    public function getIdAgent(): ?Agent
     {
         return $this->id_agent;
     }
 
-    public function setIdAgent(int $id_agent): self
+    public function setIdAgent(?Agent $id_agent): self
     {
         $this->id_agent = $id_agent;
 
@@ -88,14 +88,14 @@ class Saisie
         return $this;
     }
 
-    public function getTypeSaisie(): ?int
+    public function getIdTypeSaisie(): ?SaisieType
     {
-        return $this->type_saisie;
+        return $this->id_type_saisie;
     }
 
-    public function setTypeSaisie(int $type_saisie): self
+    public function setIdTypeSaisie(?SaisieType $id_type_saisie): self
     {
-        $this->type_saisie = $type_saisie;
+        $this->id_type_saisie = $id_type_saisie;
 
         return $this;
     }

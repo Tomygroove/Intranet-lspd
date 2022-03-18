@@ -21,6 +21,16 @@ class SaisieType
      * @ORM\Column(type="string", length=255)
      */
     private $libelle_saisie_type;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Saisie", mappedBy="id_type_saisie")
+     */
+    private $saisies;
+
+    public function __construct()
+    {
+        $this->agents = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -37,5 +47,13 @@ class SaisieType
         $this->libelle_saisie_type = $libelle_saisie_type;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Saisie[]
+     */
+    public function getSaisies(): Collection
+    {
+        return $this->saisies;
     }
 }

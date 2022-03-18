@@ -22,6 +22,16 @@ class Grade
      */
     private $libelle_grade;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Agent", mappedBy="id_grade")
+     */
+    private $agents;
+
+    public function __construct()
+    {
+        $this->agents = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -37,5 +47,13 @@ class Grade
         $this->libelle_grade = $libelle_grade;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Agent[]
+     */
+    public function getAgents(): Collection
+    {
+        return $this->agents;
     }
 }

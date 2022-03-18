@@ -28,7 +28,7 @@ class Plainte
     private $date;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Degre", inversedBy="plaintes")
      */
     private $id_degre;
 
@@ -43,7 +43,7 @@ class Plainte
     private $telephone;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\OneToMany(targetEntity="App\Entity\Agent", mappedBy="plaintes")
      */
     private $id_agent;
 
@@ -81,12 +81,12 @@ class Plainte
         return $this;
     }
 
-    public function getIdDegre(): ?int
+    public function getIdDegre(): ?Degre
     {
         return $this->id_degre;
     }
 
-    public function setIdDegre(int $id_degre): self
+    public function setIdDegre(?Degre $id_degre): self
     {
         $this->id_degre = $id_degre;
 
@@ -117,12 +117,12 @@ class Plainte
         return $this;
     }
 
-    public function getIdAgent(): ?int
+    public function getIdAgent(): ?Agent
     {
         return $this->id_agent;
     }
 
-    public function setIdAgent(int $id_agent): self
+    public function setIdAgent(?Agent $id_agent): self
     {
         $this->id_agent = $id_agent;
 

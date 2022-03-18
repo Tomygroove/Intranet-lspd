@@ -38,7 +38,7 @@ class Rapport
     private $lien_dossier;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Agent", inversedBy="rapports")
      */
     private $id_agent;
 
@@ -95,12 +95,12 @@ class Rapport
         return $this;
     }
 
-    public function getIdAgent(): ?int
+    public function getIdAgent(): ?Agent
     {
         return $this->id_agent;
     }
 
-    public function setIdAgent(int $id_agent): self
+    public function setIdAgent(?Agent $id_agent): self
     {
         $this->id_agent = $id_agent;
 

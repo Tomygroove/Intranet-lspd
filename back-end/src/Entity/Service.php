@@ -22,6 +22,16 @@ class Service
      */
     private $libelle_service;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Agent", mappedBy="id_service")
+     */
+    private $agents;
+
+    public function __construct()
+    {
+        $this->agents = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -37,5 +47,13 @@ class Service
         $this->libelle_service = $libelle_service;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Agent[]
+     */
+    public function getAgents(): Collection
+    {
+        return $this->agents;
     }
 }

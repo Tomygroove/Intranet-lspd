@@ -33,12 +33,12 @@ class Agent
     private $mot_de_passe;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Grade", inversedBy="agents")
      */
     private $id_grade;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Service", inversedBy="agents")
      */
     private $id_service;
 
@@ -51,6 +51,58 @@ class Agent
      * @ORM\Column(type="string", length=30)
      */
     private $role;
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\AvisRecherche", mappedBy="id_agent")
+     */
+    private $avis_recherches;
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Avertissement", mappedBy="id_agent")
+     */
+    private $avertissements;
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\CasierJudiciaire", mappedBy="id_agent")
+     */
+    private $casier_judiciaires;
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\DeclarationVol", mappedBy="id_agent")
+     */
+    private $declaration_vols;
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Rapport", mappedBy="id_agent")
+     */
+    private $rapports;
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Plainte", mappedBy="id_agent")
+     */
+    private $plaintes;
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Saisie", mappedBy="id_agent")
+     */
+    private $saisies;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Information", mappedBy="id_agent")
+     */
+    private $informations;
+
+    public function __construct()
+    {
+        $this->avis_recherches = new ArrayCollection();
+        $this->avertissements = new ArrayCollection();
+        $this->casier_judiciaires = new ArrayCollection();
+        $this->declaration_vols = new ArrayCollection();
+        $this->mandats = new ArrayCollection();
+        $this->plaintes = new ArrayCollection();
+        $this->saisies = new ArrayCollection();
+        $this->informations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -93,24 +145,24 @@ class Agent
         return $this;
     }
 
-    public function getIdGrade(): ?int
+    public function getIdGrade(): ?Grade
     {
         return $this->id_grade;
     }
 
-    public function setIdGrade(int $id_grade): self
+    public function setIdGrade(?Grade $id_grade): self
     {
         $this->id_grade = $id_grade;
 
         return $this;
     }
 
-    public function getIdService(): ?int
+    public function getIdService(): ?Service
     {
         return $this->id_service;
     }
 
-    public function setIdService(int $id_service): self
+    public function setIdService(?Service $id_service): self
     {
         $this->id_service = $id_service;
 
@@ -139,5 +191,69 @@ class Agent
         $this->role = $role;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|AvisRecherche[]
+     */
+    public function getAvisRecherches(): Collection
+    {
+        return $this->avis_recherches;
+    }
+    
+    /**
+     * @return Collection|Avertissement[]
+     */
+    public function getAvertissements(): Collection
+    {
+        return $this->avertissements;
+    }
+    
+    /**
+     * @return Collection|CasierJuciciaire[]
+     */
+    public function getCasisierJudiciaires(): Collection
+    {
+        return $this->casier_judiciaires;
+    }
+    
+    /**
+     * @return Collection|DeclarationVol[]
+     */
+    public function getDeclarationVols(): Collection
+    {
+        return $this->declaration_vols;
+    }
+    
+    /**
+     * @return Collection|Rapport[]
+     */
+    public function getRapports(): Collection
+    {
+        return $this->rapports;
+    }
+    
+    /**
+     * @return Collection|Plainte[]
+     */
+    public function getPlaintes(): Collection
+    {
+        return $this->plaintes;
+    }
+    
+    /**
+     * @return Collection|Saisie[]
+     */
+    public function getSaisies(): Collection
+    {
+        return $this->saisies;
+    }
+    
+    /**
+     * @return Collection|Information[]
+     */
+    public function getInformations(): Collection
+    {
+        return $this->informations;
     }
 }

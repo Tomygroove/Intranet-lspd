@@ -22,6 +22,28 @@ class Degre
      */
     private $libelle_degre;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\AvisRecherche", mappedBy="id_degre")
+     */
+    private $avis_recherches;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Mandat", mappedBy="id_degre")
+     */
+    private $mandats;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Plainte", mappedBy="id_degre")
+     */
+    private $plaintes;
+
+    public function __construct()
+    {
+        $this->avis_recherches = new ArrayCollection();
+        $this->mandats = new ArrayCollection();
+        $this->plaintes = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -37,5 +59,29 @@ class Degre
         $this->libelle_degre = $libelle_degre;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|AvisRecherche[]
+     */
+    public function getAvisRecherches(): Collection
+    {
+        return $this->avis_recherches;
+    }
+    
+    /**
+     * @return Collection|Mandat[]
+     */
+    public function getMandats(): Collection
+    {
+        return $this->mandats;
+    }
+    
+    /**
+     * @return Collection|Plainte[]
+     */
+    public function getPlaintes(): Collection
+    {
+        return $this->plaintes;
     }
 }
