@@ -4,11 +4,12 @@ namespace App\Entity;
 
 use App\Repository\AgentRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=AgentRepository::class)
  */
-class Agent
+Abstract class Agent implements UserInterface
 {
     /**
      * @ORM\Id
@@ -23,12 +24,13 @@ class Agent
     private $matricule;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50, unique=true)
      */
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string The hashed  password
+     * @ORM\Column(type="string")
      */
     private $mot_de_passe;
 
@@ -48,9 +50,9 @@ class Agent
     private $is_actif;
 
     /**
-     * @ORM\Column(type="string", length=30)
+     * @ORM\Column(type="json")
      */
-    private $role;
+    private $roles = [];
     
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\AvisRecherche", mappedBy="id_agent")
@@ -183,12 +185,12 @@ class Agent
 
     public function getRole(): ?string
     {
-        return $this->role;
+        return $this->roles;
     }
 
-    public function setRole(string $role): self
+    public function setRole(string $roles): self
     {
-        $this->role = $role;
+        $this->roles = $roles;
 
         return $this;
     }
